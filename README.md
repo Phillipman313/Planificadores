@@ -15,13 +15,16 @@ William Arce:
 
 -FIFO
 
+
 Daniel Arrieta:
 
 -SJF
 
+
 Esteban Araya:
 
 -SRTF
+
 
 Felipe Chen:
 
