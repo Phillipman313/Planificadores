@@ -2,10 +2,8 @@
 #include "RoundRobin.h"
 
 
-RoundRobin::RoundRobin(int quantum)
+RoundRobin::RoundRobin(Proceso **lista, int cantidad, int quantum) : AEsquema<ProcesoRR>(cantidad)
 {
-	this->quantum = quantum;
-
 	for (int i = 0; i < cantidad; i++) {
 		Proceso *parte = lista[i];
 		ProcesoRR *tarea = new ProcesoRR();
@@ -14,6 +12,8 @@ RoundRobin::RoundRobin(int quantum)
 		tarea->setRafaga(parte->getRafaga());
 		cola.push(tarea);
 	}
+
+	this->quantum = quantum;
 }
 
 
@@ -23,15 +23,57 @@ RoundRobin::~RoundRobin()
 
 void RoundRobin::iniciar()
 {
-
+	time_t t0 = time(NULL);
+	ProcesoRR *parte = cola.front();
+	long valor = 0;
+	if (parte != NULL)
+	{
+		parte->setInicio(valor);
+		parte->agregarInicio(valor);
+	}
+	int duracion = parte->getRafaga();
+	if (parte->getRafaga() > quantum)
+	{
+		duracion = quantum;
+	}
+	while (!cola.empty())
+	{
+		time_t t1 = time(NULL);
+		double tiempo = difftime(t1, t0);
+		if (tiempo >= duracion)
+		{
+			cola.pop();
+			valor = duracion;
+			parte->agregarAlto(valor);
+			parte->setProgreso(duracion);
+			if (duracion != parte->getRafaga())
+			{
+				cola.push(parte);
+			}
+			parte = cola.front();
+			parte->setInicio(valor);
+			parte->agregarInicio(valor);
+			t0 = t1;
+		}
+	}
 }
 
-int RoundRobin::getQuantum()
+void RoundRobin::tiempoEspera()
 {
-
+	cout << endl;
 }
 
-void RoundRobin::setQuantum(int quantum)
+void RoundRobin::tiempoEsperaMedio()
 {
+	cout << endl;
+}
 
+void RoundRobin::tiempoRetorno()
+{
+	cout << "Tiempo de retorno" << endl;
+}
+
+void RoundRobin::tiempoRetornoMedio()
+{
+	cout << "" << endl;
 }
