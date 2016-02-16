@@ -1,11 +1,11 @@
 #pragma once
-#include "Proceso.h"
+#include "AProceso.h"
 #include <vector>
 
-class ProcesoRR : public Proceso
+class ProcesoRR : public AProceso
 {
 	private:
-		long progreso;
+		int progreso;
 
 		vector<int> inicios;
 		vector<int> altos;
@@ -13,6 +13,11 @@ class ProcesoRR : public Proceso
 	public:
 		ProcesoRR();
 		~ProcesoRR();
+
+		void tiempoEspera();
+		void tiempoEsperaMedio();
+		void tiempoRetorno();
+		void tiempoRetornoMedio();
 
 		int getProgreso();
 		void setProgreso(int progreso);

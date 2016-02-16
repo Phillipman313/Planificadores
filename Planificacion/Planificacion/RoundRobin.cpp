@@ -2,15 +2,16 @@
 #include "RoundRobin.h"
 
 
-RoundRobin::RoundRobin(Proceso **lista, int cantidad, int quantum) : AEsquema<ProcesoRR>(cantidad)
+RoundRobin::RoundRobin(AProceso **lista, int cantidad, int quantum) : AEsquema<ProcesoRR>(cantidad)
 {
 	for (int i = 0; i < cantidad; i++) {
-		Proceso *parte = lista[i];
+		AProceso *parte = lista[i];
 		ProcesoRR *tarea = new ProcesoRR();
 		tarea->setId(parte->getId());
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
 		cola.push(tarea);
+		original.push_back(tarea);
 	}
 
 	this->quantum = quantum;
@@ -20,6 +21,7 @@ RoundRobin::RoundRobin(Proceso **lista, int cantidad, int quantum) : AEsquema<Pr
 RoundRobin::~RoundRobin()
 {
 }
+
 
 void RoundRobin::iniciar()
 {
@@ -56,24 +58,4 @@ void RoundRobin::iniciar()
 			t0 = t1;
 		}
 	}
-}
-
-void RoundRobin::tiempoEspera()
-{
-	cout << endl;
-}
-
-void RoundRobin::tiempoEsperaMedio()
-{
-	cout << endl;
-}
-
-void RoundRobin::tiempoRetorno()
-{
-	cout << "Tiempo de retorno" << endl;
-}
-
-void RoundRobin::tiempoRetornoMedio()
-{
-	cout << "" << endl;
 }

@@ -24,9 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Proceso.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AEsquema.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -34,6 +31,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ProcesoRR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AProceso.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,9 +44,6 @@
     <ClCompile Include="Planificacion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Proceso.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AEsquema.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProcesoRR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AProceso.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

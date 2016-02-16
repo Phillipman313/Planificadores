@@ -8,15 +8,9 @@ class RoundRobin : public AEsquema<ProcesoRR>
 		int quantum;
 
 	public:
-		//RoundRobin(int cantidad);
-		RoundRobin(Proceso **lista, int cantidad, int quantum);
+		RoundRobin(AProceso **lista, int cantidad, int quantum);
 		~RoundRobin();
 
 		void iniciar();
-
-		void tiempoEspera();
-		void tiempoEsperaMedio();
-		void tiempoRetorno();
-		void tiempoRetornoMedio();
 };
 

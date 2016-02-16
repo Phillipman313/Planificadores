@@ -1,6 +1,7 @@
 #pragma once
 #include <queue>
-#include "Proceso.h"
+#include <vector>
+#include "AProceso.h"
 #include <time.h>
 
 template <class T>
@@ -8,6 +9,8 @@ class AEsquema
 {
 	protected:
 		queue<T *> cola;
+
+		vector<T *> original;
 
 		int cantidad;
 
@@ -21,22 +24,17 @@ class AEsquema
 
 		virtual void iniciar() = 0;
 
-		virtual void tiempoEspera() = 0;
-		virtual void tiempoEsperaMedio() = 0;
-		virtual void tiempoRetorno() = 0;
-		virtual void tiempoRetornoMedio() = 0;
-
-		static Proceso **tareas(int cantidad)
+		static AProceso **tareas(int cantidad)
 		{
-			Proceso **lista = new Proceso *[cantidad];
+			AProceso **lista = new AProceso *[cantidad];
 
-			long inicio = 0;
+			int inicio = 0;
 
 			srand(time(NULL));
 
 			for (int i = 0; i < cantidad; i++)
 			{
-				Proceso *parte = new Proceso();
+				AProceso *parte = new AProceso();
 				parte->setId(i);
 				parte->setLlegada(inicio);
 				parte->setRafaga(rand() % 100 + 1);

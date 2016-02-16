@@ -11,6 +11,27 @@ ProcesoRR::~ProcesoRR()
 {
 }
 
+
+void ProcesoRR::tiempoEspera()
+{
+
+}
+
+void ProcesoRR::tiempoEsperaMedio()
+{
+
+}
+
+void ProcesoRR::tiempoRetorno()
+{
+
+}
+
+void ProcesoRR::tiempoRetornoMedio()
+{
+
+}
+
 int ProcesoRR::getProgreso()
 {
 	return this->progreso;
