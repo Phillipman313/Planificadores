@@ -11,6 +11,7 @@ ProcesoRR::~ProcesoRR()
 {
 }
 
+
 int ProcesoRR::getProgreso()
 {
 	return this->progreso;

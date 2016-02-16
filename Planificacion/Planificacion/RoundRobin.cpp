@@ -11,6 +11,7 @@ RoundRobin::RoundRobin(Proceso **lista, int cantidad, int quantum) : AEsquema<Pr
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
 		cola.push(tarea);
+		procesos.push_back(tarea);
 	}
 
 	this->quantum = quantum;
@@ -60,7 +61,11 @@ void RoundRobin::iniciar()
 
 void RoundRobin::tiempoEspera()
 {
-	cout << endl;
+	int total = 0;
+	for (int i = 0; i < cantidad; i++)
+	{
+		ProcesoRR *parte = procesos[i];
+	}
 }
 
 void RoundRobin::tiempoEsperaMedio()
