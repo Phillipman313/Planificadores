@@ -9,7 +9,6 @@ class AEsquema
 	protected:
 		queue<T *> cola;
 
-		vector<T *> procesos;
 		int cantidad;
 
 	public:
