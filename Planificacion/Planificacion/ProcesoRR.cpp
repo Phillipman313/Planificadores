@@ -17,17 +17,7 @@ void ProcesoRR::tiempoEspera()
 
 }
 
-void ProcesoRR::tiempoEsperaMedio()
-{
-
-}
-
 void ProcesoRR::tiempoRetorno()
-{
-
-}
-
-void ProcesoRR::tiempoRetornoMedio()
 {
 
 }

@@ -13,9 +13,7 @@ class AProceso
 		~AProceso();
 
 		virtual void tiempoEspera() = 0;
-		virtual void tiempoEsperaMedio() = 0;
 		virtual void tiempoRetorno() = 0;
-		virtual void tiempoRetornoMedio() = 0;
 
 		int getId();
 		void setId(int id);

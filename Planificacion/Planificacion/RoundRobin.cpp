@@ -2,16 +2,19 @@
 #include "RoundRobin.h"
 
 
-RoundRobin::RoundRobin(AProceso **lista, int cantidad, int quantum) : AEsquema<ProcesoRR>(cantidad)
+RoundRobin::RoundRobin(queue<Proceso *> trabajos, int cantidad, int quantum) : AEsquema<ProcesoRR>(cantidad)
 {
 	for (int i = 0; i < cantidad; i++) {
-		AProceso *parte = lista[i];
+		Proceso *parte = trabajos.front();
 		ProcesoRR *tarea = new ProcesoRR();
 		tarea->setId(parte->getId());
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
+		tarea->setProgreso(parte->getRafaga());
 		cola.push(tarea);
-		original.push_back(tarea);
+		lista.push_back(tarea);
+		trabajos.pop();
+		trabajos.push(parte);
 	}
 
 	this->quantum = quantum;
@@ -25,36 +28,51 @@ RoundRobin::~RoundRobin()
 
 void RoundRobin::iniciar()
 {
-	time_t t0 = time(NULL);
-	ProcesoRR *parte = cola.front();
-	long valor = 0;
-	if (parte != NULL)
+	ProcesoRR *parte = NULL;
+	int valor = 0;
+	int duracion = 0;
+	if (lista[0]->getLlegada() == 0)
 	{
-		parte->setInicio(valor);
-		parte->agregarInicio(valor);
+		parte = lista[0];
+		parte->setInicio(0);
+		parte->agregarInicio(0);
+		duracion = parte->getProgreso();
+		if (quantum > duracion)
+		{
+			duracion = quantum;
+		}
+		cola.push(parte);
+		valor++;
 	}
-	int duracion = parte->getRafaga();
-	if (parte->getRafaga() > quantum)
+	time_t iniciar = time(NULL);
+	time_t t0 = iniciar;
+	while (valor != cantidad || !cola.empty())
 	{
-		duracion = quantum;
-	}
-	while (!cola.empty())
-	{
-		time_t t1 = time(NULL);
-		double tiempo = difftime(t1, t0);
+		time_t seguir = time(NULL);
+		int segundos = (int)difftime(seguir, iniciar);
+		if (segundos >= lista[valor]->getLlegada())
+		{
+			cola.push(lista[valor]);
+			valor++;
+		}
+		time_t t1 = seguir;
+		int tiempo = (int)difftime(t1, t0);
 		if (tiempo >= duracion)
 		{
 			cola.pop();
-			valor = duracion;
-			parte->agregarAlto(valor);
-			parte->setProgreso(duracion);
-			if (duracion != parte->getRafaga())
+			parte->agregarAlto(segundos);
+			if (parte->getProgreso() != 0)
 			{
 				cola.push(parte);
 			}
 			parte = cola.front();
-			parte->setInicio(valor);
-			parte->agregarInicio(valor);
+			parte->setInicio(segundos);
+			parte->agregarInicio(segundos);
+			duracion = parte->getProgreso();
+			if (quantum > duracion)
+			{
+				duracion = quantum;
+			}
 			t0 = t1;
 		}
 	}

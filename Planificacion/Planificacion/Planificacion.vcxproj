@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="AEsquema.h" />
     <ClInclude Include="AProceso.h" />
+    <ClInclude Include="Proceso.h" />
     <ClInclude Include="ProcesoRR.h" />
     <ClInclude Include="RoundRobin.h" />
     <ClInclude Include="stdafx.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="AEsquema.cpp" />
     <ClCompile Include="AProceso.cpp" />
     <ClCompile Include="Planificacion.cpp" />
+    <ClCompile Include="Proceso.cpp" />
     <ClCompile Include="ProcesoRR.cpp" />
     <ClCompile Include="RoundRobin.cpp" />
     <ClCompile Include="stdafx.cpp">

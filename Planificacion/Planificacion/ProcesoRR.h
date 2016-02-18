@@ -15,9 +15,7 @@ class ProcesoRR : public AProceso
 		~ProcesoRR();
 
 		void tiempoEspera();
-		void tiempoEsperaMedio();
 		void tiempoRetorno();
-		void tiempoRetornoMedio();
 
 		int getProgreso();
 		void setProgreso(int progreso);
