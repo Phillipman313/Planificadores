@@ -39,6 +39,12 @@
     <ClInclude Include="Proceso.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SRTF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcesoSRTF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Proceso.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcesoSRTF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRTF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
