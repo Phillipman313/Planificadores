@@ -11,7 +11,6 @@ RoundRobin::RoundRobin(queue<Proceso *> trabajos, int cantidad, int quantum) : A
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
 		tarea->setProgreso(parte->getRafaga());
-		cola.push(tarea);
 		lista.push_back(tarea);
 		trabajos.pop();
 		trabajos.push(parte);
@@ -35,13 +34,11 @@ void RoundRobin::iniciar()
 	{
 		parte = lista[0];
 		parte->setInicio(0);
-		parte->agregarInicio(0);
 		duracion = parte->getProgreso();
 		if (quantum > duracion)
 		{
 			duracion = quantum;
 		}
-		cola.push(parte);
 		valor++;
 	}
 	time_t iniciar = time(NULL);
@@ -52,7 +49,20 @@ void RoundRobin::iniciar()
 		int segundos = (int)difftime(seguir, iniciar);
 		if (segundos >= lista[valor]->getLlegada())
 		{
-			cola.push(lista[valor]);
+			if (parte != NULL) 
+			{
+				cola.push(lista[valor]);
+			}
+			else
+			{
+				parte = lista[valor];
+				parte->setInicio(segundos);
+				duracion = parte->getProgreso();
+				if (quantum > duracion)
+				{
+					duracion = quantum;
+				}
+			}
 			valor++;
 		}
 		time_t t1 = seguir;
