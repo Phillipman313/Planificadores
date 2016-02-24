@@ -1,5 +1,6 @@
 #pragma once
 #include <queue>
+#include <deque>
 #include <vector>
 #include "Proceso.h"
 #include <time.h>
@@ -8,7 +9,7 @@ template <class T>
 class AEsquema
 {
 	protected:
-		queue<T *> cola;
+		deque<T *> cola;
 
 		vector<T *> lista;
 
@@ -24,34 +25,43 @@ class AEsquema
 
 		virtual void iniciar() = 0;
 
-		void simular()
+		T *agregarPrimero(time_t t0, int& segundos)
 		{
-			time_t t0 = time(NULL);
 			time_t t1 = t0;
-			T *parte = NULL;
-			int valor = cantidad;
-			while (valor != 0 || !cola.empty())
+			T *parte = lista[0];
+			while (segundos <= parte->getLlegada())
 			{
-				int tiempo = (int)difftime(t1, t0);
-				if (parte == NULL)
+				if (segundos == parte->getLlegada())
 				{
-					parte = lista.front();
-					if (tiempo >= parte->getLlegada())
-					{
-						cola.push(parte);
-						parte = NULL;
-						valor--;
-					}
+					parte->setInicio(segundos);
+					break;
 				}
 				t1 = time(NULL);
+				segundos = (int)difftime(t1, t0);
 			}
+			return parte;
+		}
+
+		bool agregarProceso(int& valor, int segundos)
+		{
+			bool resultado = false;
+			if (valor != cantidad)
+			{
+				if (segundos >= lista[valor]->getLlegada())
+				{
+					cola.push_back(lista[valor]);
+					++valor;
+					resultado = true;
+				}
+			}
+			return resultado;
 		}
 
 		static queue<Proceso *> tareas(int cantidad)
 		{
 			queue<Proceso *> lista;
 
-			int inicio = 0;
+			int inicio = 3;
 
 			srand(time(NULL));
 
@@ -60,7 +70,7 @@ class AEsquema
 				Proceso *parte = new Proceso();
 				parte->setId(i);
 				parte->setLlegada(inicio);
-				parte->setRafaga(rand() % 100 + 1);
+				parte->setRafaga(rand() % 10);
 				lista.push(parte);
 				inicio = rand() % 10 + (inicio + 1);
 			}

@@ -30,9 +30,6 @@
     <ClInclude Include="RoundRobin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProcesoRR.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AProceso.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,7 +39,22 @@
     <ClInclude Include="SRTF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProcesoSRTF.h">
+    <ClInclude Include="ProcesoNoEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcesoEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrioridadEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcesoPEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcesoPNoEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrioridadNoEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,19 +71,31 @@
     <ClCompile Include="RoundRobin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProcesoRR.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AProceso.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Proceso.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProcesoSRTF.cpp">
+    <ClCompile Include="SRTF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SRTF.cpp">
+    <ClCompile Include="ProcesoNoEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcesoEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrioridadEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcesoPEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcesoPNoEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrioridadNoEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

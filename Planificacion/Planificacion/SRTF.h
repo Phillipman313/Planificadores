@@ -1,16 +1,15 @@
 #pragma once
 #include "AEsquema.h"
-#include "ProcesoSRTF.h"
+#include "ProcesoEx.h"
 
 
-class SRTF : public AEsquema<ProcesoSRTF>
+class SRTF : public AEsquema<ProcesoEx>
 {
 
+	public:
+		SRTF(queue <Proceso *>trabajos, int cantidad);
+		~SRTF();
 
-
-	
-public:
-	SRTF(queue <Proceso *>trabajos, int cantidad);
-	void iniciar();
+		void iniciar();
 
 };

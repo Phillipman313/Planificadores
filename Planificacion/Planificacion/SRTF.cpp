@@ -1,26 +1,29 @@
-#include "SRTF.h"
 #include "stdafx.h"
+#include "SRTF.h"
 
 
-SRTF::SRTF(queue<Proceso*> trabajos, int cantidad): AEsquema<ProcesoSRTF>(cantidad)
+SRTF::SRTF(queue<Proceso*> trabajos, int cantidad) : AEsquema<ProcesoEx>(cantidad)
 {
 	for (int i = 0; i < cantidad; i++) {
 		Proceso *parte = trabajos.front();
-		ProcesoSRTF *tarea = new ProcesoSRTF();
+		ProcesoEx *tarea = new ProcesoEx();
 		tarea->setId(parte->getId());
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
-		tarea->setProgreso(parte->getRafaga());
-		cola.push(tarea);
+		tarea->setRestante(parte->getRafaga());
 		lista.push_back(tarea);
 		trabajos.pop();
 		trabajos.push(parte);
 	}
 }
 
+SRTF::~SRTF()
+{
+}
+
 void SRTF::iniciar()
 {
-	ProcesoSRTF *parte = NULL;
+	ProcesoEx *parte = NULL;
 	int valor = 0;
 	int duracion = 0;
 	if (lista[0]->getLlegada() == 0)
@@ -28,10 +31,10 @@ void SRTF::iniciar()
 		parte = lista[0];
 	parte->setInicio(0);
 	parte->agregarInicio(0);
-	duracion = parte->getProgreso();
-	if (parte->getProgreso < lista[0]->getLlegada())
+	duracion = parte->getRestante();
+	if (parte->getRestante() < lista[0]->getLlegada())
 	{
-		cola.push(parte);
+		cola.push_back(parte);
 		valor++;
-		}
 	}
+}

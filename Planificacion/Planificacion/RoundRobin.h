@@ -1,8 +1,8 @@
 #pragma once
 #include "AEsquema.h"
-#include "ProcesoRR.h"
+#include "ProcesoEx.h"
 
-class RoundRobin : public AEsquema<ProcesoRR>
+class RoundRobin : public AEsquema<ProcesoEx>
 {
 	private:
 		int quantum;

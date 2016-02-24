@@ -1,7 +1,7 @@
 #pragma once
 class AProceso
 {
-	private:
+	protected:
 		int id;
 		int llegada;
 		int inicio;
