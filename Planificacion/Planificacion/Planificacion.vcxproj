@@ -81,12 +81,14 @@
   <ItemGroup>
     <ClInclude Include="AEsquema.h" />
     <ClInclude Include="AProceso.h" />
+    <ClInclude Include="FIFO.h" />
     <ClInclude Include="PrioridadEx.h" />
     <ClInclude Include="PrioridadNoEx.h" />
     <ClInclude Include="ProcesoEx.h" />
     <ClInclude Include="ProcesoNoEx.h" />
     <ClInclude Include="ProcesoPEx.h" />
     <ClInclude Include="ProcesoPNoEx.h" />
+    <ClInclude Include="SJF.h" />
     <ClInclude Include="SRTF.h" />
     <ClInclude Include="Proceso.h" />
     <ClInclude Include="RoundRobin.h" />
@@ -96,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="AEsquema.cpp" />
     <ClCompile Include="AProceso.cpp" />
+    <ClCompile Include="FIFO.cpp" />
     <ClCompile Include="Planificacion.cpp" />
     <ClCompile Include="PrioridadEx.cpp" />
     <ClCompile Include="PrioridadNoEx.cpp" />
@@ -105,6 +108,7 @@
     <ClCompile Include="ProcesoPEx.cpp" />
     <ClCompile Include="ProcesoPNoEx.cpp" />
     <ClCompile Include="RoundRobin.cpp" />
+    <ClCompile Include="SJF.cpp" />
     <ClCompile Include="SRTF.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

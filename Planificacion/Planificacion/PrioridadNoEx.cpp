@@ -46,15 +46,15 @@ void PrioridadNoEx::iniciar()
 			agregarProceso(valor, segundos);
 			parte = cola.front();
 			parte->setInicio(segundos);
+			duracion = parte->getRafaga();
 			t0 = t1;
 			cola.pop_front();
 		}
 	}
 }
 
-bool PrioridadNoEx::agregarProceso(int& valor, int segundos)
+void PrioridadNoEx::agregarProceso(int& valor, int segundos)
 {
-	bool resultado = false;
 	if (valor != cantidad)
 	{
 		if (segundos >= lista[valor]->getLlegada())
@@ -71,7 +71,6 @@ bool PrioridadNoEx::agregarProceso(int& valor, int segundos)
 			{
 				int inicio = 1;
 				int fin = cantidad - 1;
-				bool listo = false;
 				int mitad = (fin - inicio) / 2;
 				while (lista[valor]->getPrioridad() != cola[mitad]->getPrioridad())
 				{
@@ -88,8 +87,6 @@ bool PrioridadNoEx::agregarProceso(int& valor, int segundos)
 				cola.insert(cola.begin() + mitad, lista[valor]);
 			}
 			++valor;
-			resultado = true;
 		}
 	}
-	return resultado;
 }

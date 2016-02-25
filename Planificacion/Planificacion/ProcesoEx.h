@@ -16,8 +16,6 @@ class ProcesoEx : public AProceso
 		void tiempoEspera();
 		void tiempoRetorno();
 
-		void reducir(int segundos);
-
 		void agregarInicio(int inicio);
 		void agregarAlto(int alto);
 

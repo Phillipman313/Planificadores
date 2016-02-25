@@ -12,4 +12,7 @@ class SRTF : public AEsquema<ProcesoEx>
 
 		void iniciar();
 
+		bool cambiarProceso(int& valor, int segundos, ProcesoEx *parte, int& duracion);
+
+		void agregarProceso(int& valor, int segundos);
 };

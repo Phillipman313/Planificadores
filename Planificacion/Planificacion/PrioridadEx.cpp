@@ -33,37 +33,44 @@ void PrioridadEx::iniciar()
 	parte = agregarPrimero(iniciar, segundos);
 	duracion = parte->getRafaga();
 	time_t t0 = iniciar;
-	int pasado = 0;
 	while (valor != cantidad || !cola.empty())
 	{
 		seguir = time(NULL);
 		segundos = (int)difftime(seguir, iniciar);
-		if (!cambiarProceso(valor, segundos, parte, duracion))
-		{
-			agregarProceso(valor, segundos);
-		}
-		time_t t1 = seguir;
-		int tiempo = (int)difftime(t1, t0);
-		if (tiempo >= duracion)
+		if (valor < cantidad)
 		{
 			if (cambiarProceso(valor, segundos, parte, duracion))
 			{
 				continue;
 			}
 			agregarProceso(valor, segundos);
-			if (parte->getRestante() != 0)
+		}
+		time_t t1 = seguir;
+		int tiempo = (int)difftime(t1, t0);
+		parte->setRestante(tiempo);
+		if (tiempo >= duracion)
+		{
+			if (valor < cantidad)
 			{
-				cola.push_back(parte);
+				if (cambiarProceso(valor, segundos, parte, duracion))
+				{
+					continue;
+				}
+				agregarProceso(valor, segundos);
 			}
+			parte->agregarAlto(segundos);
+			parte->setFin(segundos);
 			parte = cola.front();
-			parte->setInicio(segundos);
+			if (parte->getRestante() == 0)
+			{
+				parte->setInicio(segundos);
+			}
+			else
+			{
+				parte->agregarInicio(segundos);
+			}
 			t0 = t1;
 			cola.pop_front();
-		}
-		else
-		{
-			parte->reducir(tiempo - pasado);
-			pasado = tiempo;
 		}
 	}
 }
@@ -75,9 +82,10 @@ bool PrioridadEx::cambiarProceso(int& valor, int segundos, ProcesoPEx *parte, in
 	{
 		if (lista[valor]->getPrioridad() < parte->getPrioridad())
 		{
+			parte->setRestante(segundos);
 			parte->agregarAlto(segundos);
 			cola.push_back(parte);
-			duracion = lista[valor]->getRestante();
+			duracion = lista[valor]->getRafaga();
 			parte = lista[valor];
 			parte->setInicio(segundos);
 			++valor;
@@ -87,44 +95,37 @@ bool PrioridadEx::cambiarProceso(int& valor, int segundos, ProcesoPEx *parte, in
 	return true;
 }
 
-bool PrioridadEx::agregarProceso(int& valor, int segundos)
+void PrioridadEx::agregarProceso(int& valor, int segundos)
 {
-	bool resultado = false;
-	if (valor != cantidad)
+	if (segundos >= lista[valor]->getLlegada())
 	{
-		if (segundos >= lista[valor]->getLlegada())
+		if (lista[valor]->getPrioridad() <= cola.front()->getPrioridad())
 		{
-			if (lista[valor]->getPrioridad() <= cola.front()->getPrioridad())
-			{
-				cola.push_front(lista[valor]);
-			}
-			else if (lista[valor]->getPrioridad() >= cola.back()->getPrioridad())
-			{
-				cola.push_back(lista[valor]);
-			}
-			else
-			{
-				int inicio = 1;
-				int fin = cantidad - 1;
-				bool listo = false;
-				int mitad = (fin - inicio) / 2;
-				while (lista[valor]->getPrioridad() != cola[mitad]->getPrioridad())
-				{
-					if (lista[valor]->getPrioridad() > cola[mitad]->getPrioridad())
-					{
-						inicio = mitad;
-					}
-					else
-					{
-						fin = mitad;
-					}
-					mitad = (fin - inicio) / 2;
-				}
-				cola.insert(cola.begin() + mitad, lista[valor]);
-			}
-			++valor;
-			resultado = true;
+			cola.push_front(lista[valor]);
 		}
+		else if (lista[valor]->getPrioridad() >= cola.back()->getPrioridad())
+		{
+			cola.push_back(lista[valor]);
+		}
+		else
+		{
+			int inicio = 1;
+			int fin = cantidad - 1;
+			int mitad = (fin - inicio) / 2;
+			while (lista[valor]->getPrioridad() != cola[mitad]->getPrioridad())
+			{
+				if (lista[valor]->getPrioridad() > cola[mitad]->getPrioridad())
+				{
+					inicio = mitad;
+				}
+				else
+				{
+					fin = mitad;
+				}
+				mitad = (fin - inicio) / 2;
+			}
+			cola.insert(cola.begin() + mitad, lista[valor]);
+		}
+		++valor;
 	}
-	return resultado;
 }

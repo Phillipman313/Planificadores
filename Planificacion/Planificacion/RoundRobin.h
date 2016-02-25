@@ -12,5 +12,7 @@ class RoundRobin : public AEsquema<ProcesoEx>
 		~RoundRobin();
 
 		void iniciar();
+
+		void agregarProceso(int& valor, int segundos);
 };
 

@@ -24,6 +24,7 @@ class AEsquema
 		~AEsquema() {}
 
 		virtual void iniciar() = 0;
+		virtual void agregarProceso(int& valor, int segundos) = 0;
 
 		T *agregarPrimero(time_t t0, int& segundos)
 		{
@@ -40,21 +41,6 @@ class AEsquema
 				segundos = (int)difftime(t1, t0);
 			}
 			return parte;
-		}
-
-		bool agregarProceso(int& valor, int segundos)
-		{
-			bool resultado = false;
-			if (valor != cantidad)
-			{
-				if (segundos >= lista[valor]->getLlegada())
-				{
-					cola.push_back(lista[valor]);
-					++valor;
-					resultado = true;
-				}
-			}
-			return resultado;
 		}
 
 		static queue<Proceso *> tareas(int cantidad)

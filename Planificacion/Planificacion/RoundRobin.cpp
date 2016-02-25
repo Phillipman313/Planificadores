@@ -10,7 +10,6 @@ RoundRobin::RoundRobin(queue<Proceso *> trabajos, int cantidad, int quantum) : A
 		tarea->setId(parte->getId());
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
-		tarea->setRestante(parte->getRafaga());
 		lista.push_back(tarea);
 		trabajos.pop();
 		trabajos.push(parte);
@@ -24,7 +23,6 @@ RoundRobin::~RoundRobin()
 {
 }
 
-
 void RoundRobin::iniciar()
 {
 	ProcesoEx *parte = NULL;
@@ -34,13 +32,12 @@ void RoundRobin::iniciar()
 	time_t seguir = iniciar;
 	int segundos = 0;
 	parte = agregarPrimero(iniciar, segundos);
-	duracion = parte->getRestante();
+	duracion = parte->getRafaga();
 	if (quantum < duracion)
 	{
 		duracion = quantum;
 	}
 	time_t t0 = iniciar;
-	int pasado = 0;
 	while (valor != cantidad || !cola.empty())
 	{
 		seguir = time(NULL);
@@ -48,28 +45,48 @@ void RoundRobin::iniciar()
 		agregarProceso(valor, segundos);
 		time_t t1 = seguir;
 		int tiempo = (int)difftime(t1, t0);
+		parte->setRestante(tiempo);
 		if (tiempo >= duracion)
 		{
 			parte->agregarAlto(segundos);
-			if (parte->getRestante() != 0)
+			if (parte->getRestante() < parte->getRafaga())
 			{
 				agregarProceso(valor, segundos);
 				cola.push_back(parte);
 			}
-			parte = cola.front();
-			parte->setInicio(segundos);
-			duracion = parte->getRestante();
-			if (quantum < duracion)
+			else
 			{
-				duracion = quantum;
+				parte->setFin(segundos);
+			}
+			parte = cola.front();
+			if (parte->getRestante() == 0)
+			{
+				parte->setInicio(segundos);
+				duracion = parte->getRafaga();
+			}
+			else
+			{
+				parte->agregarInicio(segundos);
+				duracion = parte->getRafaga() - parte->getRestante();
+				if (quantum < duracion)
+				{
+					duracion = quantum;
+				}
 			}
 			t0 = t1;
 			cola.pop_front();
 		}
-		else
+	}
+}
+
+void RoundRobin::agregarProceso(int& valor, int segundos)
+{
+	if (valor < cantidad)
+	{
+		if (segundos >= lista[valor]->getLlegada())
 		{
-			parte->reducir(tiempo - pasado);
-			pasado = tiempo;
+			cola.push_back(lista[valor]);
+			++valor;
 		}
 	}
 }

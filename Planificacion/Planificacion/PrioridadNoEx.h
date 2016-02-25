@@ -9,6 +9,6 @@ class PrioridadNoEx : public AEsquema<ProcesoPNoEx>
 
 		void iniciar();
 
-		bool agregarProceso(int& valor, int segundos);
+		void agregarProceso(int& valor, int segundos);
 };
 

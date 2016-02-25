@@ -19,11 +19,6 @@ void ProcesoEx::tiempoRetorno()
 {
 }
 
-void ProcesoEx::reducir(int segundos)
-{
-	this->restante = this->restante - segundos;
-}
-
 void ProcesoEx::agregarInicio(int inicio)
 {
 	inicios.push_back(inicio);

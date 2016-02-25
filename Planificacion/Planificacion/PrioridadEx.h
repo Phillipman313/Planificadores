@@ -11,6 +11,6 @@ class PrioridadEx : public AEsquema<ProcesoPEx>
 
 		bool cambiarProceso(int& valor, int segundos, ProcesoPEx *parte, int& duracion);
 
-		bool agregarProceso(int& valor, int segundos);
+		void agregarProceso(int& valor, int segundos);
 };
 
