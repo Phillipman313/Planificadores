@@ -1,1 +1,29 @@
-﻿
+﻿  stdafx.cpp
+  SRTF.cpp
+  SJF.cpp
+  RoundRobin.cpp
+  ProcesoPNoEx.cpp
+  ProcesoPEx.cpp
+  ProcesoNoEx.cpp
+  ProcesoEx.cpp
+  Proceso.cpp
+  PrioridadNoEx.cpp
+  PrioridadEx.cpp
+  Planificacion.cpp
+c:\users\esteban\documents\github\planificadores\planificacion\planificacion\aesquema.h(89): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  c:\users\esteban\documents\github\planificadores\planificacion\planificacion\aesquema.h(84): note: while compiling class template member function 'std::queue<Proceso *,std::deque<_Ty,std::allocator<_Ty>>> AEsquema<AProceso>::tareas(int)'
+          with
+          [
+              _Ty=Proceso *
+          ]
+  c:\users\esteban\documents\github\planificadores\planificacion\planificacion\planificacion.cpp(22): note: see reference to function template instantiation 'std::queue<Proceso *,std::deque<_Ty,std::allocator<_Ty>>> AEsquema<AProceso>::tareas(int)' being compiled
+          with
+          [
+              _Ty=Proceso *
+          ]
+  c:\users\esteban\documents\github\planificadores\planificacion\planificacion\planificacion.cpp(22): note: see reference to class template instantiation 'AEsquema<AProceso>' being compiled
+  FIFO.cpp
+  AProceso.cpp
+  AEsquema.cpp
+  Generating Code...
+  Planificacion.vcxproj -> C:\Users\esteban\Documents\GitHub\Planificadores\Planificacion\Debug\Planificacion.exe

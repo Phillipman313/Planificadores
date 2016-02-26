@@ -37,5 +37,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	system("pause");
 
 	return 0;
+
+	cout << "SRTF" << endl;
+	SRTF *esquema = new SRTF(trabajos, cantidad);
+	esquema->iniciar();
+	cout << "" << endl;
+	esquema->desplegarLista();
+	cout << "" << endl;
+
+	system("pause");
+
+	return 0;
 }
 
