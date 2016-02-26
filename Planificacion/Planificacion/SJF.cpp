@@ -33,7 +33,7 @@ void SJF::iniciar()
 	parte = agregarPrimero(iniciar, segundos);
 	duracion = parte->getRafaga();
 	time_t t0 = iniciar;
-	while (valor != cantidad || !cola.empty())
+	while (parte != NULL)
 	{
 		seguir = time(NULL);
 		segundos = (int)difftime(seguir, iniciar);
@@ -44,11 +44,21 @@ void SJF::iniciar()
 		{
 			parte->setFin(segundos);
 			agregarProceso(valor, segundos);
-			parte = cola.front();
-			parte->setInicio(segundos);
-			duracion = parte->getRafaga();
-			t0 = t1;
-			cola.pop_front();
+			if (valor != cantidad || !cola.empty())
+			{
+				if (!cola.empty())
+				{
+					parte = cola.front();
+					parte->setInicio(segundos);
+					duracion = parte->getRafaga();
+					t0 = t1;
+					cola.pop_front();
+				}
+			}
+			else
+			{
+				parte = NULL;
+			}
 		}
 	}
 }
@@ -59,32 +69,39 @@ void SJF::agregarProceso(int& valor, int segundos)
 	{
 		if (segundos >= lista[valor]->getLlegada())
 		{
-			if (lista[valor]->getRafaga() <= cola.front()->getRafaga())
+			if (!cola.empty())
 			{
-				cola.push_front(lista[valor]);
-			}
-			else if (lista[valor]->getRafaga() >= cola.back()->getRafaga())
-			{
-				cola.push_back(lista[valor]);
+				if (lista[valor]->getRafaga() <= cola.front()->getRafaga())
+				{
+					cola.push_front(lista[valor]);
+				}
+				else if (lista[valor]->getRafaga() >= cola.back()->getRafaga())
+				{
+					cola.push_back(lista[valor]);
+				}
+				else
+				{
+					int inicio = 1;
+					int fin = cantidad - 1;
+					int mitad = (fin - inicio) / 2;
+					while (lista[valor]->getRafaga() != cola[mitad]->getRafaga())
+					{
+						if (lista[valor]->getRafaga() > cola[mitad]->getRafaga())
+						{
+							fin = mitad;
+						}
+						else
+						{
+							inicio = mitad;
+						}
+						mitad = (fin - inicio) / 2;
+					}
+					cola.insert(cola.begin() + mitad, lista[valor]);
+				}
 			}
 			else
 			{
-				int inicio = 1;
-				int fin = cantidad - 1;
-				int mitad = (fin - inicio) / 2;
-				while (lista[valor]->getRafaga() != cola[mitad]->getRafaga())
-				{
-					if (lista[valor]->getRafaga() > cola[mitad]->getRafaga())
-					{
-						fin = mitad;
-					}
-					else
-					{
-						inicio = mitad;
-					}
-					mitad = (fin - inicio) / 2;
-				}
-				cola.insert(cola.begin() + mitad, lista[valor]);
+				cola.push_back(lista[valor]);
 			}
 			++valor;
 		}

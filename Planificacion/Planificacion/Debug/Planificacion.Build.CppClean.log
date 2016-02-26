@@ -4,6 +4,7 @@ c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debu
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\stdafx.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\aesquema.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\aproceso.obj
+c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\fifo.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\planificacion.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\prioridadex.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\prioridadnoex.obj
@@ -13,9 +14,8 @@ c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debu
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\procesopex.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\procesopnoex.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\roundrobin.obj
-c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\srtf.obj
 c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\sjf.obj
-c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\fifo.obj
+c:\users\felipe\documents\github\planificadores\planificacion\planificacion\debug\srtf.obj
 c:\users\felipe\documents\github\planificadores\planificacion\debug\planificacion.ilk
 c:\users\felipe\documents\github\planificadores\planificacion\debug\planificacion.exe
 c:\users\felipe\documents\github\planificadores\planificacion\debug\planificacion.pdb

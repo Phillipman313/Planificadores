@@ -33,7 +33,7 @@ void FIFO::iniciar()
 	parte = agregarPrimero(iniciar, segundos);
 	duracion = parte->getRafaga();
 	time_t t0 = iniciar;
-	while (valor != cantidad || !cola.empty())
+	while (parte != NULL)
 	{
 		seguir = time(NULL);
 		segundos = (int)difftime(seguir, iniciar);
@@ -44,11 +44,21 @@ void FIFO::iniciar()
 		{
 			parte->setFin(segundos);
 			agregarProceso(valor, segundos);
-			parte = cola.front();
-			parte->setInicio(segundos);
-			duracion = parte->getRafaga();
-			t0 = t1;
-			cola.pop_front();
+			if (valor != cantidad || !cola.empty())
+			{
+				if (!cola.empty())
+				{
+					parte = cola.front();
+					parte->setInicio(segundos);
+					duracion = parte->getRafaga();
+					t0 = t1;
+					cola.pop_front();
+				}
+			}
+			else
+			{
+				parte = NULL;
+			}
 		}
 	}
 }

@@ -12,6 +12,11 @@ AProceso::~AProceso()
 }
 
 
+int AProceso::tiempoRetorno()
+{
+	return fin;
+}
+
 int AProceso::getId()
 {
 	return this->id;

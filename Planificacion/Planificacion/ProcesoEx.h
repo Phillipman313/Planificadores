@@ -13,8 +13,7 @@ class ProcesoEx : public AProceso
 		ProcesoEx();
 		~ProcesoEx();
 
-		void tiempoEspera();
-		void tiempoRetorno();
+		int tiempoEspera();
 
 		void agregarInicio(int inicio);
 		void agregarAlto(int alto);

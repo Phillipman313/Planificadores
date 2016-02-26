@@ -11,12 +11,16 @@ ProcesoEx::~ProcesoEx()
 {
 }
 
-void ProcesoEx::tiempoEspera()
+int ProcesoEx::tiempoEspera()
 {
-}
-
-void ProcesoEx::tiempoRetorno()
-{
+	int tiempo = inicio - llegada;
+	int largo = altos.size();
+	for (int i = 0; i < largo; i++)
+	{
+		tiempo += (inicios[i] - altos[i]);
+	}
+	espera = tiempo;
+	return espera;
 }
 
 void ProcesoEx::agregarInicio(int inicio)

@@ -5,14 +5,40 @@
 #include "AEsquema.h"
 #include "AProceso.h"
 #include "RoundRobin.h"
+#include "FIFO.h"
+#include "SJF.h"
+#include "SRTF.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	queue<Proceso *> trabajos = AEsquema<AProceso>::tareas(2);
+	cout << "Planificadores de procesos" << endl;
 
-	RoundRobin *esquema = new RoundRobin(trabajos, 2, 3);
+	int cantidad = 0;
 
+	cout << "Ingrese la cantidad de procesos: " << endl;
+
+	cin >> cantidad;
+
+	queue<Proceso *> trabajos = AEsquema<AProceso>::tareas(cantidad);
+
+	cout << "Procesos: " << endl;
+	for (int i = 0; i < cantidad; i++)
+	{
+		Proceso *parte = trabajos.front();
+		cout << "Id: " << parte->getId() << ", Llegada: " << parte->getLlegada() << ", Rafaga: " << parte->getRafaga() << endl;
+		trabajos.pop();
+		trabajos.push(parte);
+	}
+
+	//Copiar con su respectivo planificador
+	cout << "FIFO" << endl;
+	FIFO *esquema = new FIFO(trabajos, cantidad);
 	esquema->iniciar();
+	cout << "" << endl;
+	esquema->desplegarLista();
+	cout << "" << endl;
+
+	system("pause");
 
 	return 0;
 }

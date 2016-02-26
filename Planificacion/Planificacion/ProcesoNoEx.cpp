@@ -12,12 +12,8 @@ ProcesoNoEx::~ProcesoNoEx()
 }
 
 
-void ProcesoNoEx::tiempoEspera()
+int ProcesoNoEx::tiempoEspera()
 {
-
-}
-
-void ProcesoNoEx::tiempoRetorno()
-{
-
+	espera = inicio - llegada;
+	return espera;
 }

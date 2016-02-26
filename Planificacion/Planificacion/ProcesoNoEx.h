@@ -6,8 +6,7 @@ class ProcesoNoEx : public AProceso
 		ProcesoNoEx();
 		~ProcesoNoEx();
 
-		void tiempoEspera();
-		void tiempoRetorno();
+		int tiempoEspera();
 
 };
 

@@ -8,12 +8,14 @@ class AProceso
 		int rafaga;
 		int fin;
 
+		int espera;
+
 	public:
 		AProceso();
 		~AProceso();
 
-		virtual void tiempoEspera() = 0;
-		virtual void tiempoRetorno() = 0;
+		virtual int tiempoEspera() = 0;
+		int tiempoRetorno();
 
 		int getId();
 		void setId(int id);
@@ -29,5 +31,6 @@ class AProceso
 
 		int getFin();
 		void setFin(int fin);
+
 };
 

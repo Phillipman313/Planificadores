@@ -32,7 +32,7 @@ class AEsquema
 			T *parte = lista[0];
 			while (segundos <= parte->getLlegada())
 			{
-				if (segundos == parte->getLlegada())
+				if (segundos >= parte->getLlegada())
 				{
 					parte->setInicio(segundos);
 					break;
@@ -43,11 +43,48 @@ class AEsquema
 			return parte;
 		}
 
+		void tiempoEsperaMedio()
+		{
+			cout << "Tiempo de espera medio: (";
+			int total = 0;
+			int largo = cantidad - 1;
+			for (int i = 0; i < largo; i++)
+			{
+				total += lista[i]->tiempoEspera();
+				cout << lista[i]->tiempoEspera() << " + ";
+			}
+			cout << lista[largo]->tiempoEspera() << ") = ";
+			cout << total / cantidad << endl;
+		}
+
+		void tiempoRetornoMedio()
+		{
+			cout << "Tiempo de retorno medio: (";
+			int total = 0;
+			int largo = cantidad - 1;
+			for (int i = 0; i < largo; i++)
+			{
+				total += lista[i]->tiempoRetorno();
+				cout << lista[i]->tiempoRetorno() << " + ";
+			}
+			cout << lista[largo]->tiempoRetorno() << ") = ";
+			cout << total / cantidad << endl;
+		}
+
+		void desplegarLista()
+		{
+			for (int i = 0; i < cantidad; i++)
+			{
+				T *parte = lista[i];
+				cout << "Id: " << parte->getId() << ", Inicio: " << parte->getInicio() << ", Tiempo de espera: " << parte->tiempoEspera() << ", Tiempo de retorno: " << parte->tiempoRetorno() << endl;
+			}
+		}
+
 		static queue<Proceso *> tareas(int cantidad)
 		{
 			queue<Proceso *> lista;
 
-			int inicio = 3;
+			int inicio = 0;
 
 			srand(time(NULL));
 
@@ -56,7 +93,7 @@ class AEsquema
 				Proceso *parte = new Proceso();
 				parte->setId(i);
 				parte->setLlegada(inicio);
-				parte->setRafaga(rand() % 10);
+				parte->setRafaga(rand() % 10 + 1);
 				lista.push(parte);
 				inicio = rand() % 10 + (inicio + 1);
 			}

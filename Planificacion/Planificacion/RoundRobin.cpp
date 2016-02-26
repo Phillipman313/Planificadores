@@ -38,7 +38,7 @@ void RoundRobin::iniciar()
 		duracion = quantum;
 	}
 	time_t t0 = iniciar;
-	while (valor != cantidad || !cola.empty())
+	while (parte != NULL)
 	{
 		seguir = time(NULL);
 		segundos = (int)difftime(seguir, iniciar);
@@ -58,23 +58,33 @@ void RoundRobin::iniciar()
 			{
 				parte->setFin(segundos);
 			}
-			parte = cola.front();
-			if (parte->getRestante() == 0)
+			if (valor != cantidad || !cola.empty())
 			{
-				parte->setInicio(segundos);
-				duracion = parte->getRafaga();
+				if (!cola.empty())
+				{
+					parte = cola.front();
+					if (parte->getRestante() == 0)
+					{
+						parte->setInicio(segundos);
+						duracion = parte->getRafaga();
+					}
+					else
+					{
+						parte->agregarInicio(segundos);
+						duracion = parte->getRafaga() - parte->getRestante();
+						if (quantum < duracion)
+						{
+							duracion = quantum;
+						}
+					}
+					t0 = t1;
+					cola.pop_front();
+				}
 			}
 			else
 			{
-				parte->agregarInicio(segundos);
-				duracion = parte->getRafaga() - parte->getRestante();
-				if (quantum < duracion)
-				{
-					duracion = quantum;
-				}
+				parte = NULL;
 			}
-			t0 = t1;
-			cola.pop_front();
 		}
 	}
 }
