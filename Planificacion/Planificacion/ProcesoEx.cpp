@@ -23,6 +23,11 @@ int ProcesoEx::tiempoEspera()
 	return espera;
 }
 
+void ProcesoEx::cambiar()
+{
+	restante += progreso;
+}
+
 void ProcesoEx::agregarInicio(int inicio)
 {
 	inicios.push_back(inicio);
@@ -41,4 +46,14 @@ int ProcesoEx::getRestante()
 void ProcesoEx::setRestante(int restante)
 {
 	this->restante = restante;
+}
+
+int ProcesoEx::getProgreso()
+{
+	return this->progreso;
+}
+
+void ProcesoEx::setProgreso(int progreso)
+{
+	this->progreso = progreso;
 }

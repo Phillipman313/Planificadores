@@ -11,6 +11,7 @@ PrioridadNoEx::PrioridadNoEx(queue<Proceso *> trabajos, int cantidad) : AEsquema
 		tarea->setId(parte->getId());
 		tarea->setLlegada(parte->getLlegada());
 		tarea->setRafaga(parte->getRafaga());
+		tarea->setPrioridad(rand() % 10);
 		lista.push_back(tarea);
 		trabajos.pop();
 		trabajos.push(parte);
@@ -33,7 +34,7 @@ void PrioridadNoEx::iniciar()
 	parte = agregarPrimero(iniciar, segundos);
 	duracion = parte->getRafaga();
 	time_t t0 = iniciar;
-	while (valor != cantidad || !cola.empty())
+	while (parte != NULL)
 	{
 		seguir = time(NULL);
 		segundos = (int)difftime(seguir, iniciar);
@@ -44,11 +45,22 @@ void PrioridadNoEx::iniciar()
 		{
 			parte->setFin(segundos);
 			agregarProceso(valor, segundos);
-			parte = cola.front();
-			parte->setInicio(segundos);
-			duracion = parte->getRafaga();
-			t0 = t1;
-			cola.pop_front();
+			if (valor != cantidad || !cola.empty())
+			{
+				if (!cola.empty())
+				{
+					parte = cola.front();
+					parte->setInicio(segundos);
+					duracion = parte->getRafaga();
+					t0 = t1;
+					cola.pop_front();
+					cout << "Proceso: " << parte->getId() << endl;
+				}
+			}
+			else
+			{
+				parte = NULL;
+			}
 		}
 	}
 }
@@ -59,32 +71,32 @@ void PrioridadNoEx::agregarProceso(int& valor, int segundos)
 	{
 		if (segundos >= lista[valor]->getLlegada())
 		{
-			if (lista[valor]->getPrioridad() <= cola.front()->getPrioridad())
+			if (!cola.empty())
 			{
-				cola.push_front(lista[valor]);
-			}
-			else if (lista[valor]->getPrioridad() >= cola.back()->getPrioridad())
-			{
-				cola.push_back(lista[valor]);
+				if (lista[valor]->getPrioridad() <= cola.front()->getPrioridad())
+				{
+					cola.push_front(lista[valor]);
+				}
+				else if (lista[valor]->getPrioridad() >= cola.back()->getPrioridad())
+				{
+					cola.push_back(lista[valor]);
+				}
+				else
+				{
+					int lugar = 0;
+					for (int i = cola.size() - 1; i > 0; i--)
+					{
+						if (lista[valor]->getPrioridad() <= cola[i]->getPrioridad())
+						{
+							lugar = i;
+						}
+					}
+					cola.insert(cola.begin() + lugar, lista[valor]);
+				}
 			}
 			else
 			{
-				int inicio = 1;
-				int fin = cantidad - 1;
-				int mitad = (fin - inicio) / 2;
-				while (lista[valor]->getPrioridad() != cola[mitad]->getPrioridad())
-				{
-					if (lista[valor]->getPrioridad() > cola[mitad]->getPrioridad())
-					{
-						inicio = mitad;
-					}
-					else
-					{
-						fin = mitad;
-					}
-					mitad = (fin - inicio) / 2;
-				}
-				cola.insert(cola.begin() + mitad, lista[valor]);
+				cola.push_back(lista[valor]);
 			}
 			++valor;
 		}

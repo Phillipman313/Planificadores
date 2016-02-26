@@ -8,6 +8,8 @@
 #include "FIFO.h"
 #include "SJF.h"
 #include "SRTF.h"
+#include "PrioridadNoEx.h"
+#include "PrioridadEx.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -31,12 +33,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	//Copiar con su respectivo planificador
-	cout << "FIFO" << endl;
-	FIFO *esquema = new FIFO(trabajos, cantidad);
-	esquema->iniciar();
-	cout << "" << endl;
-	esquema->desplegarLista();
-	cout << "" << endl;
 
 	system("pause");
 

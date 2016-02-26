@@ -45,13 +45,14 @@ void RoundRobin::iniciar()
 		agregarProceso(valor, segundos);
 		time_t t1 = seguir;
 		int tiempo = (int)difftime(t1, t0);
-		parte->setRestante(tiempo);
+		parte->setProgreso(tiempo);
 		if (tiempo >= duracion)
 		{
-			parte->agregarAlto(segundos);
 			if (parte->getRestante() < parte->getRafaga())
 			{
 				agregarProceso(valor, segundos);
+				parte->agregarAlto(segundos);
+				parte->cambiar();
 				cola.push_back(parte);
 			}
 			else
@@ -67,6 +68,10 @@ void RoundRobin::iniciar()
 					{
 						parte->setInicio(segundos);
 						duracion = parte->getRafaga();
+						if (quantum < duracion)
+						{
+							duracion = quantum;
+						}
 					}
 					else
 					{

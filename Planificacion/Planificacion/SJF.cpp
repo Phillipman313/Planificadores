@@ -53,6 +53,7 @@ void SJF::iniciar()
 					duracion = parte->getRafaga();
 					t0 = t1;
 					cola.pop_front();
+					cout << "Proceso: " << parte->getId() << endl;
 				}
 			}
 			else
@@ -81,22 +82,15 @@ void SJF::agregarProceso(int& valor, int segundos)
 				}
 				else
 				{
-					int inicio = 1;
-					int fin = cantidad - 1;
-					int mitad = (fin - inicio) / 2;
-					while (lista[valor]->getRafaga() != cola[mitad]->getRafaga())
+					int lugar = 0;
+					for (int i = cola.size() - 1; i > 0; i--)
 					{
-						if (lista[valor]->getRafaga() > cola[mitad]->getRafaga())
+						if (lista[valor]->getRafaga() < cola[i]->getRafaga())
 						{
-							fin = mitad;
+							lugar = i;
 						}
-						else
-						{
-							inicio = mitad;
-						}
-						mitad = (fin - inicio) / 2;
 					}
-					cola.insert(cola.begin() + mitad, lista[valor]);
+					cola.insert(cola.begin() + lugar, lista[valor]);
 				}
 			}
 			else

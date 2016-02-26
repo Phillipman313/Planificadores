@@ -95,7 +95,7 @@ class AEsquema
 				parte->setLlegada(inicio);
 				parte->setRafaga(rand() % 10 + 1);
 				lista.push(parte);
-				inicio = rand() % 10 + (inicio + 1);
+				inicio = rand() % 3 + (inicio + 1);
 			}
 
 			return lista;

@@ -45,7 +45,7 @@ void SRTF::iniciar()
 		}
 		time_t t1 = seguir;
 		int tiempo = (int)difftime(t1, t0);
-		parte->setRestante(tiempo);
+		parte->setProgreso(tiempo);
 		if (tiempo >= duracion)
 		{
 			if (valor < cantidad)
@@ -59,15 +59,18 @@ void SRTF::iniciar()
 			parte->setFin(segundos);
 			if (valor != cantidad || !cola.empty())
 			{
-				if (!cola.empty()){
+				if (!cola.empty())
+				{
 					parte = cola.front();
 					if (parte->getRestante() == 0)
 					{
 						parte->setInicio(segundos);
+						duracion = parte->getRafaga();
 					}
 					else
 					{
 						parte->agregarInicio(segundos);
+						duracion = parte->getRafaga() - parte->getRestante();
 					}
 					t0 = t1;
 					cola.pop_front();
@@ -86,11 +89,12 @@ bool SRTF::cambiarProceso(int& valor, int segundos, ProcesoEx *parte, int& durac
 	bool resultado = false;
 	if (segundos >= lista[valor]->getLlegada())
 	{
+		parte->cambiar();
 		if (lista[valor]->getRafaga() < parte->getRestante())
 		{
 			parte->agregarAlto(segundos);
 			cola.push_back(parte);
-			duracion = parte->getRafaga();
+			duracion = lista[valor]->getRafaga();
 			parte = lista[valor];
 			parte->setInicio(segundos);
 			++valor;
@@ -118,21 +122,15 @@ void SRTF::agregarProceso(int& valor, int segundos)
 				}
 				else
 				{
-					int inicio = 1;
-					int fin = cantidad - 1;
-					int mitad = (fin - inicio) / 2;
-					while (lista[valor]->getRafaga() != cola[valor]->getRafaga())
+					int lugar = 0;
+					for (int i = cola.size() - 1; i > 0; i--)
 					{
-						if (lista[valor]->getRafaga() > cola[mitad]->getRafaga())
+						if (lista[valor]->getRafaga() < cola[i]->getRafaga())
 						{
-							inicio = mitad;
-						}
-						else
-						{
-							fin = mitad;
+							lugar = i;
 						}
 					}
-					cola.insert(cola.begin() + mitad, lista[valor]);
+					cola.insert(cola.begin() + lugar, lista[valor]);
 				}
 			}
 			else
