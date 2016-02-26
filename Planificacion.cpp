@@ -38,10 +38,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	esquema->desplegarLista();
 	cout << "" << endl;
 
-	system("pause");
-
-	return 0;
-
 	// Aplica el SJF
 	cout << "SJF" << endl;
 	SJF *esquemaSJF = new SJF(trabajos, cantidad);
